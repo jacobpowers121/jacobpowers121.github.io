@@ -7,50 +7,143 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      padding: 2rem;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       background: #f0f2f5;
       font-family: Arial, sans-serif;
     }
-    .card {
+    .nav-card {
       background: #fff;
-      padding: 2rem;
+      padding: 0.5rem;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      max-width: 320px;
-      width: 100%;
-    }
-    .card h1 {
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
-    }
-    .card p {
-      margin-top: 0;
+      display: flex;
+      width: 720px;
+      max-width: 100%;
       margin-bottom: 1.5rem;
-      color: #555;
+    }
+    .nav-card button {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .nav-card button.active {
+      border-bottom: 2px solid #0366d6;
+      font-weight: bold;
+    }
+    .content-container {
+      width: 720px;
+      max-width: 100%;
+    }
+    .content {
+      display: none;
+    }
+    .content.active {
+      display: block;
+    }
+    .card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .card + .card {
+      margin-top: 1rem;
+    }
+    .card h2 {
+      margin-top: 0;
     }
     .card a {
-      display: inline-block;
-      margin: 0.5rem;
       color: #0366d6;
       text-decoration: none;
-      font-weight: bold;
     }
     .card a:hover {
       text-decoration: underline;
     }
+    img.project-img {
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Jacob Powers</h1>
-    <p>Software Engineer</p>
-    <a href="https://github.com/jacobpowers121" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/jacob-powers-3a78b6178/" target="_blank">LinkedIn</a>
-    <a href="mailto:jacob.powers121@gmail.com">jacob.powers121@gmail.com</a>
+  <!-- Navigation Tabs -->
+  <div class="nav-card">
+    <button class="tab active" data-target="home">Home</button>
+    <button class="tab" data-target="projects">Projects</button>
+    <button class="tab" data-target="career">Career</button>
+    <button class="tab" data-target="contact">Contact</button>
   </div>
+
+  <!-- Content Sections -->
+  <div class="content-container">
+    <!-- Home Tab -->
+    <div id="home" class="content active">
+      <div class="card">
+        <h2>Welcome!</h2>
+        <p>Hello, I’m Jacob Powers, a software engineer specializing in building scalable web applications and backend services. Welcome to my portfolio page!</p>
+      </div>
+    </div>
+
+    <!-- Projects Tab -->
+    <div id="projects" class="content">
+      <div class="card">
+        <img src="your-image.jpg" alt="Project Screenshot" class="project-img">
+        <h2>STR Insights</h2>
+        <p><a href="https://str-intl.com/" target="_blank">Visit Website</a></p>
+        <p>Short description of the STR Insights project goes here.</p>
+      </div>
+    </div>
+
+    <!-- Career Tab -->
+    <div id="career" class="content">
+      <div class="card">
+        <h2>Education</h2>
+        <ul>
+          <li>Undergraduate at UW Parkside, 2021</li>
+          <li>Master’s at UW Parkside, Spring 2025</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Career Progression</h2>
+        <ul>
+          <li>Software Engineer, Uline (2021–2024)</li>
+          <li>Senior Software Engineering Tech Lead, Alight (2024)</li>
+          <li>Full Stack Engineer, Prove (2025–present)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact Tab -->
+    <div id="contact" class="content">
+      <div class="card">
+        <h2>Contact Me</h2>
+        <p>
+          <a href="https://github.com/jacobpowers121" target="_blank">GitHub</a> |
+          <a href="https://www.linkedin.com/in/jacob-powers-3a78b6178/" target="_blank">LinkedIn</a> |
+          <a href="mailto:jacob.powers121@gmail.com">jacob.powers121@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.target;
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
